@@ -41,8 +41,8 @@ def find_disease_db_id_and_disease_from_sign_id(sign_id):
     return result
 
 if __name__ == "__main__":
-    print(find_disease_db_id_and_sign_id_from_disease("Sotos syndrome"))
-    print(find_disease_and_sign_id_from_disease_db_id("DECIPHER:17"))
+    #print(find_disease_db_id_and_sign_id_from_disease("100050 AARSKOG SYNDROME, AUTOSOMAL DOMINANT"))
+   # print(find_disease_and_sign_id_from_disease_db_id("DECIPHER:17"))
     print(find_disease_db_id_and_disease_from_sign_id("HP:0000098"))
 
 #user1 = cursor.fetchone()

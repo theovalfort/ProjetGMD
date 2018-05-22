@@ -53,21 +53,26 @@ database.close()
 
 
 def searchById(id):
+    resultID = []
     for j in range(i - 1):
         if (int(root.child[j].child[0].id) == id):
-            print(root.child[j].child[1].name)
+            resultID.append(root.child[j].child[1].name)
+    return resultID
 
 def searchByName(name):
+    resultName = []
     for j in range(i-1):
         if (name in root.child[j].child[1].name):
-            print (root.child[j].child[0].id)
+            resultName.append(root.child[j].child[2].effect)
+    return resultName
 
-def searchBySideEffect(effect):
+def searchBySymptom(effect):
+    resultSymptom = []
     for j in range(i-1):
         if effect in root.child[j].child[2].effect :
-            print(root.child[j].child[1].name)
+            resultSymptom.append(root.child[j].child[1].name)
+    return resultSymptom
 
-
-searchById(616211)
-searchByName("EPILEPTIC ENCEPHALOPATHY")
-searchBySideEffect("Mild to moderate short stature")
+#print(searchById(616211))
+#print(searchByName("EPILEPTIC ENCEPHALOPATHY"))
+#print(searchBySymptom("Hip dislocation"))

@@ -58,5 +58,5 @@ def find_disease_ans_synonyms_from_CUI_Id(id_CUI):
 
 if __name__ == "__main__":
     print(find_synonyms_and_CUI_Id_from_disease("N-ACYL PHOSPHATIDYLETHANOLAMINE-HYDROLYZING PHOSPHOLIPASE D"))
-    print(find_disease_and_CUI_Id_from_synonyms("PLCB4|PLC-BETA-4"))
-    print(find_disease_ans_synonyms_from_CUI_Id("C1425950"))
+    print(find_disease_and_CUI_Id_from_synonyms("N-ACYL PHOSPHATIDYLETHANOLAMINE PHOSPHOLIPASE D|NAPEPLD"))
+    print(find_disease_ans_synonyms_from_CUI_Id("C2239773"))
