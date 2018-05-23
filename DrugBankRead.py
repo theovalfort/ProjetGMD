@@ -41,7 +41,7 @@ class DrugContentHandler(xml.sax.ContentHandler):
 
 
 
-print("Parsing, please wait")
+print("Parsing of DrugBank, please wait")
 d = DrugContentHandler()
 xml.sax.parse(source, d)
 print("End of the parsing")

@@ -28,6 +28,7 @@ terme5 = "*RECORD*"
 
 root = Tree()
 i = 0
+print("Parsing of OMIM.txt, please wait")
 for line in database:
     line.strip().split('/n')
 
@@ -50,6 +51,7 @@ for line in database:
         root.child[i-1].child[2].setEffect(effect)
 
 database.close()
+print("End of the parsing")
 
 
 def searchById(id):

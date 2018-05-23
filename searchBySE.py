@@ -15,7 +15,7 @@ def searchSE(sideEffect):
     tabResult = []
     dictResult= {}
     cid = med.find_stitch_id_and_CUI_id_from_side_effect_name(sideEffect)
-    atcresult=[]
+    #print(cid)
 
     drugo=dbr.searchOrigin(sideEffect)
 
@@ -33,18 +33,22 @@ def searchSE(sideEffect):
 
     for i in range(len(cid)):
         cid1=cid[0][i]['stitch_compound_id1'][:3]+"m"+cid[0][i]['stitch_compound_id1'][4:12]
-        #print(cid1)
         cid2=cid[0][i]['stitch_compound_id2'][:3]+"s"+cid[0][i]['stitch_compound_id2'][4:12]
-        #print(cid2)
         atcid = sti.querytsvCID(cid1,cid2)
-        #print("stitch", atcid)
-        atcresult.append(atc.searchName(atcid))
-        #print(atcresult)
-    #print(atcresult)
+        atcresult=atc.searchName(atcid)
+        dictResult["Side Effect"] = sideEffect
+        dictResult["Origin"] = atcresult
+        dictResult['original Files'] = 'DrugBank'
+        dictResult['Iterations'] = 1
+        tabResult.append(dictResult)
+        writer.writerow({"Side Effect": sideEffect, "Origin": atcresult,
+                         'original Files': 'DrugBank', 'Iterations': 1})
+
 
     return tabResult
     resultfile.close()
-searchSE("Abdominal cramps")
+
+#print(searchSE("Abdominal cramps"))
 
 
 

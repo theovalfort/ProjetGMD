@@ -22,4 +22,4 @@ def searchName(ATCid):
     return HashMap[ATCid];
 
 
-print(searchName('A16AX02'))
+#print(searchName('A16AX02'))

@@ -23,6 +23,7 @@ def searchDisease(symptom):
     couch = cdb.searchByClinicalSign(symptom)
     hpID = hpobo.searchHPOidbySymptom(symptom)
     cui = med.find_stitch_id_and_CUI_id_from_side_effect_name(symptom)
+   # print(cui)
 
 
 
@@ -65,17 +66,20 @@ def searchDisease(symptom):
                  'original Files': 'HPO.obo + HPO.sqlite + DrugBank', 'Iterations': 1})
 
     for i in range(len(cui)):
-        res = ocsv.find_disease_ans_synonyms_from_CUI_Id(cui[0][i]['cui'])
-        #res = ocsv.find_disease_ans_synonyms_from_CUI_Id('C2239773')
-        if res is not None:
-            drug = dbr.searchTreatment(res)
-            dictResult["Symptom"] = symptom
-            dictResult["Disease Name"] = res
-            dictResult['Drug'] = drug
-            dictResult['original Files'] = 'Meddra + Omim.csv + DrugBank'
-            dictResult['Iterations'] = 1
-            tabResult.append(dictResult)
-            writer.writerow(
+       # print(cui[i])
+        if cui[i] != []:
+            #print("ui",cui[i][0]['cui'])
+            res = ocsv.find_disease_ans_synonyms_from_CUI_Id(cui[i][0]['cui'])
+            #res = ocsv.find_disease_ans_synonyms_from_CUI_Id('C2239773')
+            if res is not None:
+                drug = dbr.searchTreatment(res)
+                dictResult["Symptom"] = symptom
+                dictResult["Disease Name"] = res
+                dictResult['Drug'] = drug
+                dictResult['original Files'] = 'Meddra + Omim.csv + DrugBank'
+                dictResult['Iterations'] = 1
+                tabResult.append(dictResult)
+                writer.writerow(
                 {"Symptom": symptom, "Disease Name": res, 'Drug': drug,
                  'original Files': 'Meddra + Omim.csv + DrugBank', 'Iterations': 1})
 
@@ -112,4 +116,4 @@ def resultClassification(file):
 
 
 # resultClassification("results.csv")
-print(searchDisease('Hip dislocation'))
+#print(searchDisease('Maxillary hypoplasia'))
