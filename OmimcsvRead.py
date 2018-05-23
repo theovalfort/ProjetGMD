@@ -45,7 +45,8 @@ def find_disease_ans_synonyms_from_CUI_Id(id_CUI):
     f_omim = csv.reader(file)
     for row in f_omim:
         if row[5]==id_CUI:
-            return (row[1], row[2])
+            #return (row[1], row[2])
+            return row[1]
     f_omim.close()
 
 # def find_synonyms_from_CUI_Id(id_CUI):
