@@ -5,17 +5,17 @@ __author__ = "Capucine"
 __date__ = "mai 2018"
 
 
-# on importe le module MySQLdb
+
 import MySQLdb
 
-# On créé un dictionnaire contenant les paramètres de connexion MySQL
+
 paramMysql = {
     'host'   : 'neptune.telecomnancy.univ-lorraine.fr',
     'user'   : 'gmd-read',
     'passwd' : 'esial',
     'db'     : 'gmd'
 }
-# Bien respecter les noms des paramètres (host, user, passwd, db)
+
 
 
 def find_stitch_id_and_CUI_id_from_side_effect_name(side_effect_name):
@@ -102,3 +102,6 @@ def find_stitch_id_and_side_effect_name_from_CUI_id(CUI_id):
 
     conn.close()
     return result_meddra_freq, result_meddra_all_indications, result_meddra
+
+
+print(find_stitch_id_and_CUI_id_from_side_effect_name("Abdominal cramps"))
