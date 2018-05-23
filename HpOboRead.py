@@ -2,8 +2,8 @@ database = open('hp.obo', 'r')
 
 HashMap = {}
 
-def searchBySymptom (symptom):
-    for line in database :
+
+for line in database :
         if line.startswith("id"):
             a=line.split()
             id = a[1]
@@ -16,4 +16,9 @@ def searchBySymptom (symptom):
                 fullname = ' '.join(name)
                 HashMap[fullname]=id
 
-    return HashMap
+
+
+
+def searchHPOidbySymptom(symptom):
+    if symptom in HashMap:
+        return HashMap[symptom]
