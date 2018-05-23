@@ -22,6 +22,8 @@ def searchDisease(symptom):
     omimtxt = otxt.searchBySymptom(symptom)
     couch = cdb.searchByClinicalSign(symptom)
     hpID = hpobo.searchHPOidbySymptom(symptom)
+    cui = med.find_stitch_id_and_CUI_id_from_side_effect_name("Abdominal cramps")
+
 
 
     for i in range(len(couch) - 1):
@@ -64,6 +66,23 @@ def searchDisease(symptom):
             writer.writerow(
                 {"Symptom": symptom, "Disease Name": hpresult[i].rstrip(), 'Side Effect origin' : '', 'Drug':drug,
                  'original Files': 'HPO.obo + HPO.sqlite + DrugBank', 'Iterations': 1})
+
+    for i in range(len(cui)):
+        res = ocsv.find_disease_ans_synonyms_from_CUI_Id(cui[0][i]['cui'])
+        #res = ocsv.find_disease_ans_synonyms_from_CUI_Id('C2239773')
+        if res is not None:
+            drug = dbr.searchTreatment(res)
+            dictResult["Symptom"] = symptom
+            dictResult["Disease Name"] = res
+            dictResult['Side Effect origin'] = ''
+            dictResult['Drug'] = drug
+            dictResult['original Files'] = 'Meddra + Omim.csv + DrugBank'
+            dictResult['Iterations'] = 1
+            tabResult.append(dictResult)
+            writer.writerow(
+                {"Symptom": symptom, "Disease Name": res, 'Side Effect origin': '', 'Drug': drug,
+                 'original Files': 'Meddra + Omim.csv + DrugBank', 'Iterations': 1})
+
 
     return tabResult
     resultfile.close()

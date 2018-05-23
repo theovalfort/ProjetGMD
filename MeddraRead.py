@@ -103,6 +103,6 @@ def find_stitch_id_and_side_effect_name_from_CUI_id(CUI_id):
     conn.close()
     return result_meddra_freq, result_meddra_all_indications, result_meddra
 
-
-#print(find_stitch_id_and_CUI_id_from_side_effect_name("Abdominal cramps")[0][15]['stitch_compound_id1'][:3]+"m"+find_stitch_id_and_CUI_id_from_side_effect_name("Abdominal cramps")[0][15]['stitch_compound_id1'][4:12])
+#print(find_stitch_id_and_CUI_id_from_side_effect_name("Abdominal cramps")[0][0]['cui'])
+#print(find_stitch_id_and_CUI_id_from_side_effect_name("Abdominal cramps")[0][15]['stitch_compound_id2'][:3]+"s"+find_stitch_id_and_CUI_id_from_side_effect_name("Abdominal cramps")[0][15]['stitch_compound_id2'][4:12])
 #a=find_stitch_id_and_CUI_id_from_side_effect_name("Abdominialcramps")[0][:3]+"m"+find_stitch_id_and_CUI_id_from_side_effect_name("Abdominialcramps")

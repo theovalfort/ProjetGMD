@@ -13,7 +13,7 @@ def find_synonyms_and_CUI_Id_from_disease(disease_name):
     for row in f_omim:
         if row[1]==disease_name:
             return (row[2], row[5])
-    f_omim.close()
+    file.close()
 
 #
 # def find_CUI_Id_from_disease(disease_name):
@@ -30,7 +30,7 @@ def find_disease_and_CUI_Id_from_synonyms(synonyms):
     for row in f_omim:
         if row[2]==synonyms:
             return (row[1], row[5])
-    f_omim.close()
+    file.close()
 
 # def find_CUI_Id_from_synonyms(synonyms):
 #     file = open("omim_onto.csv", "r")
@@ -47,7 +47,7 @@ def find_disease_ans_synonyms_from_CUI_Id(id_CUI):
         if row[5]==id_CUI:
             #return (row[1], row[2])
             return row[1]
-    f_omim.close()
+    file.close()
 
 # def find_synonyms_from_CUI_Id(id_CUI):
 #     file = open("omim_onto.csv", "r")
@@ -60,4 +60,4 @@ def find_disease_ans_synonyms_from_CUI_Id(id_CUI):
 if __name__ == "__main__":
     print(find_synonyms_and_CUI_Id_from_disease("N-ACYL PHOSPHATIDYLETHANOLAMINE-HYDROLYZING PHOSPHOLIPASE D"))
     print(find_disease_and_CUI_Id_from_synonyms("N-ACYL PHOSPHATIDYLETHANOLAMINE PHOSPHOLIPASE D|NAPEPLD"))
-    print(find_disease_ans_synonyms_from_CUI_Id("C2239773"))
+    print(find_disease_ans_synonyms_from_CUI_Id("C0000729"))
