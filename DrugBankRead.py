@@ -51,12 +51,21 @@ print("End of the parsing")
     #print(d.DiseasesTab)
 def searchTreatment(symptom):
     result=[]
-    for i in range(len(d.DiseasesTab)-1):
+    for i in range(len(d.DiseasesTab)):
         if symptom.lower() in (d.DiseasesTab[i]).lower():
             result.append(d.DrugName[i])
 
     return result
+
+def searchOrigin(sideEffect):
+    result = []
+    for i in range(len(d.SideEffectTab)):
+        if sideEffect.lower() in (d.SideEffectTab[i]).lower():
+            result.append(d.DrugName[i])
+    return result
+
 if __name__ == "__main__":
     print(searchTreatment("muscular"))
+    print(searchOrigin("dyspnea"))
 
 

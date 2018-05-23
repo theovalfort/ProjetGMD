@@ -13,7 +13,7 @@ symptom = ""
 
 def searchDisease(symptom):
     resultfile = open("results.csv", "w", newline='')
-    fieldnames = ['Symptom', 'Disease Name', 'Side Effect origin', 'Drug', 'original Files', 'Iterations']
+    fieldnames = ['Symptom', 'Disease Name', 'Drug', 'original Files', 'Iterations']
     writer = csv.DictWriter(resultfile, fieldnames=fieldnames)
     writer.writeheader()
     tabResult = []
@@ -22,7 +22,7 @@ def searchDisease(symptom):
     omimtxt = otxt.searchBySymptom(symptom)
     couch = cdb.searchByClinicalSign(symptom)
     hpID = hpobo.searchHPOidbySymptom(symptom)
-    cui = med.find_stitch_id_and_CUI_id_from_side_effect_name("Abdominal cramps")
+    cui = med.find_stitch_id_and_CUI_id_from_side_effect_name(symptom)
 
 
 
@@ -30,25 +30,23 @@ def searchDisease(symptom):
         drug = dbr.searchTreatment(couch[i].rstrip())
         dictResult["Symptom"]=symptom
         dictResult["Disease Name"]=couch[i].rstrip()
-        dictResult['Side Effect origin']=''
         dictResult['Drug']=drug
         dictResult['original Files']='Orphadata + DrugBank'
         dictResult['Iterations']=1
         tabResult.append(dictResult)
         #print(tabResult)
-        writer.writerow({"Symptom": symptom, "Disease Name": couch[i].rstrip(), 'Side Effect origin': '', 'Drug': drug,
+        writer.writerow({"Symptom": symptom, "Disease Name": couch[i].rstrip(), 'Drug': drug,
                          'original Files': 'Orphadata + DrugBank', 'Iterations': 1})
 
     for i in range(len(omimtxt) - 1):
         drug = dbr.searchTreatment(omimtxt[i].rstrip())
         dictResult["Symptom"] = symptom
         dictResult["Disease Name"] = omimtxt[i].rstrip()
-        dictResult['Side Effect origin'] = ''
         dictResult['Drug'] = drug
         dictResult['original Files'] = 'Omim.txt + DrugBank'
         dictResult['Iterations'] = 1
         tabResult.append(dictResult)
-        writer.writerow({"Symptom": symptom, "Disease Name": omimtxt[i].rstrip(), 'Side Effect origin': '', 'Drug': drug,
+        writer.writerow({"Symptom": symptom, "Disease Name": omimtxt[i].rstrip(), 'Drug': drug,
                          'original Files': 'Omim.txt + DrugBank', 'Iterations': 1})
     if hpID is not None:
         hp = hsql.find_disease_db_id_and_disease_from_sign_id(hpID)
@@ -58,13 +56,12 @@ def searchDisease(symptom):
             drug = dbr.searchTreatment(hpresult[i].rstrip())
             dictResult["Symptom"] = symptom
             dictResult["Disease Name"] = hpresult[i].rstrip()
-            dictResult['Side Effect origin'] = ''
             dictResult['Drug'] = drug
             dictResult['original Files'] = 'HPO.obo + HPO.sqlite + DrugBank'
             dictResult['Iterations'] = 1
             tabResult.append(dictResult)
             writer.writerow(
-                {"Symptom": symptom, "Disease Name": hpresult[i].rstrip(), 'Side Effect origin' : '', 'Drug':drug,
+                {"Symptom": symptom, "Disease Name": hpresult[i].rstrip(), 'Drug':drug,
                  'original Files': 'HPO.obo + HPO.sqlite + DrugBank', 'Iterations': 1})
 
     for i in range(len(cui)):
@@ -74,13 +71,12 @@ def searchDisease(symptom):
             drug = dbr.searchTreatment(res)
             dictResult["Symptom"] = symptom
             dictResult["Disease Name"] = res
-            dictResult['Side Effect origin'] = ''
             dictResult['Drug'] = drug
             dictResult['original Files'] = 'Meddra + Omim.csv + DrugBank'
             dictResult['Iterations'] = 1
             tabResult.append(dictResult)
             writer.writerow(
-                {"Symptom": symptom, "Disease Name": res, 'Side Effect origin': '', 'Drug': drug,
+                {"Symptom": symptom, "Disease Name": res, 'Drug': drug,
                  'original Files': 'Meddra + Omim.csv + DrugBank', 'Iterations': 1})
 
 
