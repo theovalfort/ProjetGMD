@@ -9,7 +9,7 @@ import DrugBankRead as dbr
 
 def searchSE(sideEffect):
     resultfile = open("resultsSE.csv", "w", newline='')
-    fieldnames = ['Side Effect', 'Origin', 'original Files', 'Iterations']
+    fieldnames = ['Side Effect', 'Origin', 'Treatment', 'original Files', 'Iterations']
     writer = csv.DictWriter(resultfile, fieldnames=fieldnames)
     writer.writeheader()
     tabResult = []
@@ -20,28 +20,31 @@ def searchSE(sideEffect):
     drugo=dbr.searchOrigin(sideEffect)
 
     for i in range(len(drugo)):
+           drug = dbr.searchTreatment(drugo[i].rstrip())
            dictResult["Side Effect"] = sideEffect
            dictResult["Origin"] = drugo[i].rstrip()
            dictResult['original Files'] = 'DrugBank'
            dictResult['Iterations'] = 1
            tabResult.append(dictResult)
            # print(tabResult)
-           writer.writerow({"Side Effect": sideEffect, "Origin": drugo[i].rstrip(),
+           writer.writerow({"Side Effect": sideEffect, "Origin": drugo[i].rstrip(), "Treatment" : drug,
                              'original Files': 'DrugBank', 'Iterations': 1})
 
 
 
     for i in range(len(cid)):
+
         cid1=cid[0][i]['stitch_compound_id1'][:3]+"m"+cid[0][i]['stitch_compound_id1'][4:12]
         cid2=cid[0][i]['stitch_compound_id2'][:3]+"s"+cid[0][i]['stitch_compound_id2'][4:12]
         atcid = sti.querytsvCID(cid1,cid2)
         atcresult=atc.searchName(atcid)
+        drug = dbr.searchTreatment(atcid)
         dictResult["Side Effect"] = sideEffect
         dictResult["Origin"] = atcresult
         dictResult['original Files'] = 'DrugBank'
         dictResult['Iterations'] = 1
         tabResult.append(dictResult)
-        writer.writerow({"Side Effect": sideEffect, "Origin": atcresult,
+        writer.writerow({"Side Effect": sideEffect, "Origin": atcresult, "Treatment" : drug,
                          'original Files': 'DrugBank', 'Iterations': 1})
 
 
